@@ -7,6 +7,11 @@ export type Gacha = {
   count: number
 }
 
+const imageUrlState = atom({
+  key: 'imageUrlState',
+  default: ''
+})
+
 const gachaState = atom<Gacha[]>({
   key: 'gachaState',
   default: []
@@ -14,6 +19,8 @@ const gachaState = atom<Gacha[]>({
 
 export const useGacha = () => {
   const [gachas, setGachas] = useRecoilState(gachaState)
+
+  const [imageUrl, setImageUrl] = useRecoilState(imageUrlState)
 
   const add = useCallback(
     (gacha: Gacha) => {
@@ -23,6 +30,8 @@ export const useGacha = () => {
   )
   return {
     gachas,
-    add
+    add,
+    imageUrl,
+    setImageUrl
   }
 }

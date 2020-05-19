@@ -35,7 +35,7 @@ const Component: React.FCX<Props> = (props) => (
       </div>
     </nav>
 
-    <div className="container mx-auto bg-white pt-16 h-full">
+    <div className="container mx-auto bg-white pt-16 min-h-full">
       {props.children}
       <BottomNavi />
     </div>

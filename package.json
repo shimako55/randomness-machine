@@ -11,12 +11,15 @@
     "prettier": "prettier --write '**/*.{ts,tsx}'"
   },
   "dependencies": {
+    "@giphy/js-fetch-api": "^1.5.9",
+    "@giphy/react-components": "^1.0.7",
     "@zeit/next-css": "^1.0.1",
     "next": "9.4.1",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "recoil": "^0.0.7",
     "styled-components": "^5.1.0",
+    "swr": "^0.2.0",
     "tailwindcss": "^1.4.6"
   },
   "devDependencies": {
