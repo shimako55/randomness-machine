@@ -1,6 +1,14 @@
-import { useCallback } from 'react'
-import { useLocalStorageRecoilState } from '@/hooks/useLocalStorageRecoilState'
-import { localStorageAtom } from '@/helper/localStorageAtom'
+import { useState, useEffect } from 'react'
+import firebase from '@/lib/firebase'
+import { useUser } from './useUser'
+
+let firestore
+let usersCollection: any
+
+if (typeof window !== 'undefined') {
+  firestore = firebase.firestore()
+  usersCollection = firestore.collection('users')
+}
 
 export type Gacha = {
   title: string
@@ -8,27 +16,40 @@ export type Gacha = {
   count: number
 }
 
-const gachaState = localStorageAtom<Gacha[]>({
-  key: 'gachaState',
-  default: []
-})
-
 export const useGacha = () => {
-  const [gachas, setGachas] = useLocalStorageRecoilState(gachaState)
+  const { user: authUser } = useUser()
+  const [gachas, setGachas] = useState<Gacha[]>([])
+  useEffect(() => {
+    ;(async () => {
+      if (!authUser) {
+        return
+      }
+      const user = (await usersCollection.doc(authUser.id).get()).data()
+      if (user) {
+        setGachas(user.gachas)
+      }
+    })()
+  }, [authUser])
 
-  const add = useCallback(
-    (gacha: Gacha) => {
-      setGachas((gachaList) => [...gachaList, gacha])
-    },
-    [setGachas]
-  )
+  const add = (gacha: Gacha) => {
+    setGachas((gachaList) => {
+      const newGachaList = [...gachaList, gacha]
+      usersCollection.doc(authUser!.id).set({
+        gachas: newGachaList
+      })
+      return newGachaList
+    })
+  }
 
-  const edit = useCallback(
-    (id: number, gacha: Gacha) => {
-      setGachas((gachaList) => gachaList.map((v, i) => (i === id ? gacha : v)))
-    },
-    [setGachas]
-  )
+  const edit = (id: number, gacha: Gacha) => {
+    setGachas((gachaList) => {
+      const newGachaList = gachaList.map((v, i) => (i === id ? gacha : v))
+      usersCollection.doc(authUser!.id).set({
+        gachas: newGachaList
+      })
+      return newGachaList
+    })
+  }
 
   return {
     gachas,
