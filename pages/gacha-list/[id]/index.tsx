@@ -1,10 +1,11 @@
 // (1) import層
 import React, { useRef } from 'react'
 import { NextPage } from 'next'
-import styled from 'styled-components'
 import { useRouter } from 'next/router'
 import { useGacha, Gacha } from '@/hooks/useGacha'
 import GachaForm from '@/components/GachaForm'
+import { styled } from 'twin.macro'
+import { v4 } from 'uuid'
 
 // (2) Types層
 type Props = {
@@ -55,7 +56,9 @@ const Page: NextPage<Props> = (props) => {
     const title = formRef.current?.gachaTitle?.value
     const imageUrl = formRef.current?.imageUrl?.value
     const count = Number(formRef.current?.count?.value)
-    edit(id, {
+    const id = v4()
+    edit({
+      id,
       title,
       imageUrl,
       count

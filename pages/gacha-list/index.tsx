@@ -1,10 +1,10 @@
 // (1) import層
 import React from 'react'
 import { NextPage } from 'next'
-import styled from 'styled-components'
 import GachaCard from '@/components/GachaCard'
 import { useGacha, Gacha } from '@/hooks/useGacha'
 import Link from 'next/link'
+import { styled } from 'twin.macro'
 
 // (2) Types層
 type ContainerProps = {}

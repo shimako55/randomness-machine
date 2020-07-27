@@ -11,6 +11,9 @@
     "prettier": "prettier --write '**/*.{ts,tsx}'"
   },
   "dependencies": {
+    "@emotion/babel-preset-css-prop": "^10.0.27",
+    "@emotion/core": "^10.0.28",
+    "@emotion/styled": "^10.0.27",
     "@zeit/next-css": "^1.0.1",
     "firebase": "^7.16.1",
     "js-cookie": "^2.2.1",
@@ -20,13 +23,15 @@
     "react-firebaseui": "^4.1.0",
     "recoil": "^0.0.10",
     "styled-components": "^5.1.1",
-    "tailwindcss": "^1.5.1"
+    "tailwindcss": "^1.5.1",
+    "twin.macro": "^1.6.2",
+    "uuid": "^8.2.0"
   },
   "devDependencies": {
     "@types/js-cookie": "^2.2.6",
     "@types/node": "^14.0.23",
     "@types/react": "^16.9.43",
-    "@types/styled-components": "^5.1.1",
+    "@types/uuid": "^8.0.0",
     "@typescript-eslint/eslint-plugin": "^3.6.1",
     "@typescript-eslint/parser": "^3.6.1",
     "babel-plugin-styled-components": "^1.10.7",
@@ -43,5 +48,14 @@
     "postcss-preset-env": "^6.7.0",
     "prettier": "^2.0.5",
     "typescript": "^4.0.0-beta"
+  },
+  "babelMacros": {
+    "twin": {
+      "config": "tailwind.config.js",
+      "preset": "emotion",
+      "debugProp": true,
+      "debugPlugins": false,
+      "debug": false
+    }
   }
 }

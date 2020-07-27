@@ -2,7 +2,8 @@ import App, { AppInitialProps, AppContext } from 'next/app'
 import Head from 'next/head'
 import { RecoilRoot } from 'recoil'
 import Layout from '@/components/Layout'
-import '../css/tailwind.css'
+// import '../css/tailwind.css'
+import 'tailwindcss/dist/base.min.css'
 
 export default class MyApp extends App<AppInitialProps> {
   render() {
