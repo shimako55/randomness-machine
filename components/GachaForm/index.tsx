@@ -1,8 +1,8 @@
 // (1) import層
 import React from 'react'
 import { NextPage } from 'next'
-import styled from 'styled-components'
 import { Gacha } from '@/hooks/useGacha'
+import tw, { styled } from 'twin.macro'
 
 // (2) Types層
 
@@ -16,26 +16,25 @@ type Props = {
 
 // (3) DOM層
 const Component: React.FCX<Props> = ({
-  className,
   handleSubmit,
   formRef,
   gacha,
   title
 }) => (
-  <div className={className}>
+  <div>
     <form
-      className="max-w-xl m-4 p-10 bg-white rounded shadow-xl"
+      tw="max-w-xl m-4 p-10 bg-white rounded shadow-xl"
       ref={formRef}
       onSubmit={(e) => {
         e.preventDefault()
         return handleSubmit()
       }}
     >
-      <p className="text-gray-800 font-medium">{title} Gacha</p>
+      <p tw="text-gray-800 font-medium">{title} Gacha</p>
       <div>
-        <label className="block text-sm text-gray-00">Title</label>
+        <label tw="block text-sm text-gray-100">Title</label>
         <input
-          className="w-full px-5 py-1 text-gray-700 bg-gray-200 rounded"
+          tw="w-full px-5 py-1 text-gray-700 bg-gray-200 rounded"
           name="gachaTitle"
           defaultValue={gacha?.title || ''}
           type="text"
@@ -43,9 +42,9 @@ const Component: React.FCX<Props> = ({
         />
       </div>
       <div>
-        <label className="block text-sm text-gray-00">Image url</label>
+        <label tw="block text-sm text-gray-100">Image url</label>
         <input
-          className="w-full px-5 py-1 text-gray-700 bg-gray-200 rounded"
+          tw="w-full px-5 py-1 text-gray-700 bg-gray-200 rounded"
           name="imageUrl"
           defaultValue={gacha?.imageUrl || ''}
           type="text"
@@ -53,18 +52,18 @@ const Component: React.FCX<Props> = ({
         />
       </div>
       <div>
-        <label className="block text-sm text-gray-00">Count</label>
+        <label tw="block text-sm text-gray-100">Count</label>
         <input
-          className="w-full px-5 py-1 text-gray-700 bg-gray-200 rounded"
+          tw="w-full px-5 py-1 text-gray-700 bg-gray-200 rounded"
           name="count"
           type="number"
           defaultValue={gacha?.count || 1}
           required
         />
       </div>
-      <div className="mt-4">
+      <div tw="mt-4">
         <button
-          className="px-4 py-1 text-white font-light tracking-wider bg-gray-900 rounded"
+          tw="px-4 py-1 text-white font-light tracking-wider bg-gray-900 rounded"
           type="submit"
         >
           SAVE

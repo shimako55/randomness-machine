@@ -1,11 +1,15 @@
 import Link from 'next/link'
 import FirebaseAuth from '@/components/FirebaseAuth'
 import { useUser } from '@/hooks/useUser'
-// import { useState, useEffect } from 'react'
 import firebase from '@/lib/firebase'
+import tw, { styled } from 'twin.macro'
+import { useGacha } from '@/hooks/useGacha'
+import GachaCard from '@/components/GachaCard'
 
 export default function Home() {
   const { user, logout } = useUser()
+
+  const { open, gachas, determinedGacha } = useGacha()
 
   // const [user, setUser] = useState<unknown | null>(null)
   // useEffect(() => {
@@ -20,11 +24,10 @@ export default function Home() {
     firestore.collection('test').add({
       hoge: 'hoge'
     })
-    console.log('log')
   }
 
   return (
-    <main className="text-red-500">
+    <main tw="text-red-500">
       <div>hellow, Randomness machine!!!!</div>
       <Link href="/gacha-list">
         <a>Gacha List</a>
@@ -33,6 +36,15 @@ export default function Home() {
       <div>{JSON.stringify(user)}</div>
       <button onClick={() => logout()}>logout</button>
       <button onClick={handleSave}>save</button>
+      {gachas.length > 0 && (
+        <button
+          onClick={() => open()}
+          tw="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        >
+          ガチャる
+        </button>
+      )}
+      {determinedGacha && <GachaCard gacha={determinedGacha} />}
     </main>
   )
 }

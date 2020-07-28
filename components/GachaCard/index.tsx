@@ -1,7 +1,7 @@
 // (1) import層
 import React from 'react'
-import styled from 'styled-components'
 import { Gacha } from '@/hooks/useGacha'
+import tw, { styled } from 'twin.macro'
 
 // (2) Types層
 type Props = {
@@ -12,20 +12,16 @@ type ContainerProps = Props & {}
 // (3) DOM層
 const Component: React.FCX<Props> = ({ className, gacha }) => (
   <div className={className}>
-    <article className="overflow-hidden rounded-lg shadow-lg">
-      <img
-        alt="Placeholder"
-        className="block h-auto w-full"
-        src={gacha.imageUrl}
-      />
+    <article tw="overflow-hidden rounded-lg shadow-lg">
+      <img alt="Placeholder" tw="block h-auto w-full" src={gacha.imageUrl} />
 
-      <header className="flex items-center justify-between leading-tight p-2 md:p-4">
-        <h1 className="text-lg">
-          <span className="no-underline hover:underline text-black">
+      <header tw="flex items-center justify-between leading-tight p-2 md:p-4">
+        <h1 tw="text-lg">
+          <span tw="no-underline hover:underline text-black">
             {gacha.title}
           </span>
         </h1>
-        <p className="text-grey-darker text-sm">{gacha.count}</p>
+        <p tw="text-gray-700 text-sm">{gacha.count}</p>
       </header>
     </article>
   </div>
